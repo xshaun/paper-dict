@@ -27,11 +27,11 @@ on ubuntu(other linux distribution):
 
 local file:
 
-    pdf2words.py -i ./\<relative path>/target.pdf
+    pdf2words.py -i ./<relative path>/target.pdf
 
 remote file:
 
-    pdf2words.py -i \<URL path>/target.pdf
+    pdf2words.py -i <URL path>/target.pdf
 
 ## Future Features ?
 - support to filter words through ignore.txt.
