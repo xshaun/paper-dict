@@ -89,7 +89,7 @@ def consult_bing(words_list):
 
     rset.add(keyword)
     word_info = [ x for x in [keyword, pronunciation, explanation] if x ]
-    print (word_info)
+    #print (word_info)
     result.append(word_info)
 
   result.sort()
@@ -124,7 +124,7 @@ def main(argv):
   # process
   text_string = pdf2text(pdf_file)
   words_list = text2words(text_string)
-  print (words_list)
+  #print (words_list)
   result = consult_bing(words_list)
   
   # show
