@@ -37,3 +37,4 @@ remote file:
 - support to filter words through ignore.txt.
 - support to multiple threads to speed up queries.
 - support more spiders to consult more dictionaries.
+- support local or cache dictionary.
