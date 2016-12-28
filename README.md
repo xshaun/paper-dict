@@ -44,9 +44,9 @@ $ pdf2words.py -i <URL path>/target.pdf
 the same as above method
 
 **STEP2. Build Docker Image**
+>Run the command at directory which Dockerfile located at, And notice the last point in this command.   
+>Or You can run it with `-f` option. 
 
-Run the command at directory which Dockerfile located at, And notice the last point in this command.
-Or You can run it with `-f` option. 
 ```Shell
 $ docker build -t pdf2words-img .
 # or
