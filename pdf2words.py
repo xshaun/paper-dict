@@ -12,7 +12,7 @@ import logging
 import os
 import re
 import sys
-
+import time
 
 # DETAILS: resolve an issue (get warnings while running)
 # 
@@ -73,24 +73,35 @@ def text2words(text_string):
 
 # structure of return value
 # [
-#   [keyword1, pronunciation1, explanation1],
-#   [keyword2, explanation2],
-#   [keyword3, pronunciation3],
-#   ...
+#   [ 
+#       [keyword1, pronunciation1, explanation1],
+#       [keyword2, explanation2],
+#       [keyword3, pronunciation3], 
+#       ...
+#   ], // <- good_words
+#   [ word1, word2, ...] // <- bad_words
 # ]
 def consult_bing(words_list):
-    result = []
-    rset = set()
-
-    for word in words_list:
+    good_words = []
+    good_words_tag = set()
+    bad_words = []
+    
+    s_words_list = list(set(words_list))
+    for word in s_words_list:
         # HTML response
-        while True:
+        tcount = 5
+        while True and tcount > 0:
             try:
                 doc = pyq(url=r'http://cn.bing.com/dict/search?q=' + word)
                 break
-            except:
+            except:    # capture all exceptions
+                tcount -= 1
                 time.sleep(2)
                 continue
+        
+        if tcount == 0 : 
+            bad_words.append(word)
+            continue
 
         # DOM node of effective content
         cts = doc('.content>.rs_area>.lf_area>.qdef')
@@ -98,7 +109,7 @@ def consult_bing(words_list):
 
         # DOM node of searching word
         keyword = cts.find('.hd_area>#headword>h1>strong').text()
-        if keyword in rset: continue
+        if keyword in good_words_tag: continue
 
         # DOM node of word's pronunciation
         pronunciation = cts.find('.hd_area>.hd_tf_lh>.hd_p1_1').text()
@@ -110,11 +121,13 @@ def consult_bing(words_list):
             e_def = pyq(e).children('span.def').text()
             explanation.append('[' + e_pos + ']' + e_def)
 
-        rset.add(keyword)
+        good_words_tag.add(keyword)
         word_info = [ x for x in [keyword, pronunciation, explanation] if x ]
-        result.append(word_info)
+        good_words.append(word_info)
 
-    result.sort()
+    good_words.sort()
+    bad_words.sort()
+    result = [good_words, bad_words]
     return (result)
 
 
@@ -151,12 +164,13 @@ def main(argv):
     result = consult_bing(words_list)
   
     # show
-    print ('sum words: ', len(result))
-    print ('---------------')
-    for record in result:
+    print ('good words:', len(result[0]), ', bad words:', len(result[1]))
+    if result[1]: print ('bad_words: ', result[1])
+    print ('===> good_words below <===')
+    for record in result[0]:
+        print ('---------------')
         for item in record:
-            print (item)
-            print ('---------------')
+            print (item)   
 
 
 if __name__ == "__main__":
