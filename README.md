@@ -10,10 +10,10 @@
     3. [Make it executable](#step3-make-it-executable)
     4. [Enjoy](#step4-enjoy)
   * [Docker](#docker)
-    1. [Download pdf2words.py](#step1-download-pdf2wordspy)
+    1. [Download pdf2words.py](#step1-download-pdf2wordspy-1)
     2. [Build Docker Image](#step2-build-docker-image)
     3. [Create a container](#step3-create-a-container)
-    4. [Enjoy](#step4-enjoy)
+    4. [Enjoy](#step4-enjoy-1)
 2. [Features](#features)
 
 ## How to use
