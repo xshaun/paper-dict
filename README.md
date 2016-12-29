@@ -4,9 +4,9 @@
 ---
 
 1. How to use
-  * [Traditional](#Traditional)
-  * [Docker](#Docker)
-2. [Features](#Features)
+  * [Traditional](#traditional)
+  * [Docker](#docker)
+2. [Features](#features)
 
 ## How to use
 
