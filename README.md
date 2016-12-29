@@ -12,7 +12,7 @@
 
 ### Traditional
 
-**STEP1. Download pdf2words.py**
+**1. Download pdf2words.py**
 
 git or downloader(wget, curl ...)
 ```Shell
@@ -23,7 +23,7 @@ $ wget https://github.com/xshaun/pdf2words/archive/master.zip
 $ curl -sSL https://github.com/xshaun/pdf2words/archive/master.tar.gz | tar -xzv
 ```
 
-**STEP2. Install dependency packages**
+**2. Install dependency packages**
 
 on ubuntu(debian):
 ```Shell
@@ -31,14 +31,14 @@ $ sudo apt-get install python3 python3-pip libxml2-dev libxslt-dev libzip-dev
 $ pip3 install pdfminer3k pyquery urllib3
 ```
 
-**STEP3. Make it executable**
+**3. Make it executable**
 
 on ubuntu(other linux distribution):
 ```Shell
 $ sudo chmod +x pdf2words.py
 ```
 
-**STEP4. Enjoy**
+**4. Enjoy**
 
 local file:
 ```Shell
