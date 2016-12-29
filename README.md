@@ -5,15 +5,15 @@
 
 1. How to use
   * [Traditional](#traditional)
-    1. [Download pdf2words.py]()
-    2. [Install dependency packages]()
-    3. [Make it executable]()
-    4. [Enjoy]()
+    1. [Download pdf2words.py](#step1-download-pdf2wordspy)
+    2. [Install dependency packages](#step2-install-dependency-packages)
+    3. [Make it executable](#step3-make-it-executable)
+    4. [Enjoy](#step4-enjoy)
   * [Docker](#docker)
-    1. [Download pdf2words.py]()
-    2. [Build Docker Image]()
-    3. [Create a container]()
-    4. [Enjoy]()
+    1. [Download pdf2words.py](#step1-download-pdf2wordspy)
+    2. [Build Docker Image](#step2-build-docker-image)
+    3. [Create a container](#step3-create-a-container)
+    4. [Enjoy](#step4-enjoy)
 2. [Features](#features)
 
 ## How to use
