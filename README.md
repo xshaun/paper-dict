@@ -1,7 +1,17 @@
 # pdf2words
-convert PDF to text , then split them into words , and consult words through python-spider
+>convert PDF to text, then split them into words, and consult online-directory through spiders(python script), finally build a vocabulary list.
 
-## How to use (Traditional) ?
+---
+
+1. How to use
+  * [Traditional](#Traditional)
+  * [Docker](#Docker)
+2. [Features](#Features)
+
+## How to use
+
+### Traditional
+
 **STEP1. Download pdf2words.py**
 
 git or downloader(wget, curl ...)
@@ -38,7 +48,9 @@ remote file:
 ```Shell
 $ pdf2words.py -i <URL path>/target.pdf
 ```
-## How to use (Docker) ?
+
+### Docker
+
 **STEP1. Download pdf2words.py**
 
 the same as above method
@@ -72,8 +84,11 @@ remote file:
 root@019d28813cae:/# pdf2words -i <URL path>/target.pdf
 ```
 
-## Future Features ?
-- support to filter words through ignore.txt.
-- support to multiple threads to speed up queries.
-- support more spiders to consult more dictionaries.
-- support local or cache dictionary.
+## Features
+- [x] support to convert local pdf-file and remote pdf-file.
+- [x] support to consult online-bing dictionary.
+- [ ] support to filter words through ignore.txt.
+- [ ] support to multiple threads to speed up queries.
+- [ ] support more spiders to consult more dictionaries.
+- [ ] support local or cache dictionary.
+- [ ] support progress-bar.
