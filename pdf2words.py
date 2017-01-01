@@ -1,4 +1,4 @@
-#!/usr/bin/python3.4
+#!/usr/bin/python3
 # -*- coding: utf-8 -*-
 
 from io import StringIO
@@ -24,12 +24,11 @@ import time
 # It sets propagation to False.
 #   Because after PDFMiner usage, I had duplicate logging entries. 
 #   This was caused by the root logger.
-
 logging.propagate = False 
 logging.getLogger().setLevel(logging.ERROR)
 
 
-def pdf2text(pdf_file):
+def pdf2text(pdf_file) :
     rsrcmgr = PDFResourceManager()
     retstr = StringIO()
     laparams = LAParams()
@@ -43,7 +42,7 @@ def pdf2text(pdf_file):
     return (content)
 
 
-def text2words(text_string):
+def text2words(text_string) :
     # rectify words having a break.
     temp, number = re.compile(r'-\s{1}').subn('', text_string) 
     
@@ -58,12 +57,12 @@ def text2words(text_string):
         
     # process words individually and remove redundancy by set.
     rset = set()
-    for word in temp.split(' '):
+    for word in temp.split(' ') :
         # eliminate special chatacters at either end
         word = word.strip('-').strip('\'')
 
         # eliminate pure number/single-character/words-over-20-characters
-        if not re.compile(r'(^[0-9-]*$)|^.{1}$|^.{20,}$').match(word):
+        if not re.compile(r'(^[0-9-]*$)|^.{1}$|^.{20,}$').match(word) :
             rset.add(word)
 
     result = list(rset)
@@ -78,38 +77,32 @@ def text2words(text_string):
 #       [keyword2, explanation2],
 #       [keyword3, pronunciation3], 
 #       ...
-#   ], // <- good_words
-#   [ word1, word2, ...] // <- bad_words
+#   ], // <- success_words
+#   [ word1, word2, ...] // <- failure_words
 # ]
-def consult_bing(words_list):
-    good_words = []
-    good_words_tag = set()
-    bad_words = []
+def consult_bing(words_list) :
+    success_words_tag = set()
+    success_words     = []
+    failure_words     = list(set(words_list))
     
-    s_words_list = list(set(words_list))
-    for word in s_words_list:
+    for word in failure_words :
         # HTML response
-        tcount = 5
-        while True and tcount > 0:
-            try:
+        for i in range(5) :
+            try : 
                 doc = pyq(url=r'http://cn.bing.com/dict/search?q=' + word)
+                failure_words.remove(word)
                 break
-            except:    # capture all exceptions
-                tcount -= 1
+            except :    # capture all exceptions
                 time.sleep(2)
                 continue
-        
-        if tcount == 0 : 
-            bad_words.append(word)
-            continue
-
+   
         # DOM node of effective content
         cts = doc('.content>.rs_area>.lf_area>.qdef')
-        if not cts: continue
+        if not cts : continue
 
         # DOM node of searching word
         keyword = cts.find('.hd_area>#headword>h1>strong').text()
-        if keyword in good_words_tag: continue
+        if keyword in success_words_tag : continue
 
         # DOM node of word's pronunciation
         pronunciation = cts.find('.hd_area>.hd_tf_lh>.hd_p1_1').text()
@@ -120,40 +113,40 @@ def consult_bing(words_list):
             e_pos = pyq(e).children('span.pos').text()
             e_def = pyq(e).children('span.def').text()
             explanation.append('[' + e_pos + ']' + e_def)
-
-        good_words_tag.add(keyword)
+        
         word_info = [ x for x in [keyword, pronunciation, explanation] if x ]
-        good_words.append(word_info)
+        success_words.append(word_info)
+        success_words_tag.add(keyword)
 
-    good_words.sort()
-    bad_words.sort()
-    result = [good_words, bad_words]
+    success_words.sort()
+    failure_words.sort()
+    result = [success_words, failure_words]
     return (result)
 
 
-def main(argv):
+def main(argv) :
     # argv
     input_pdf_file = ''
-    try:
+    try :
         opts, args = getopt.getopt(argv,"hi:",["ifile="])
-    except getopt.GetoptError:
+    except getopt.GetoptError :
         print ('pdf2words.py -i <input_pdf_file>')
         sys.exit(2)
-    for opt, arg in opts:
-        if opt == '-h':
+    for opt, arg in opts :
+        if opt == '-h' :
             print ('pdf2words.py -i <input_pdf_file>')
             sys.exit()
-        elif opt in ("-i", "--ifile"):
+        elif opt in ("-i", "--ifile") :
             input_pdf_file = arg
 
     # validity of input
-    try:
+    try :
         pdf_file = urlopen(input_pdf_file)
-    except:
-        try:
+    except :
+        try :
             location = os.path.abspath(input_pdf_file)
             pdf_file = open(location, 'rb')
-        except:
+        except :
             print (' invalid argv \'input_pdf_file\' ')
             sys.exit()
 
@@ -164,14 +157,14 @@ def main(argv):
     result = consult_bing(words_list)
   
     # show
-    print ('good words:', len(result[0]), ', bad words:', len(result[1]))
-    if result[1]: print ('bad_words: ', result[1])
-    print ('===> good_words below <===')
-    for record in result[0]:
+    print ('success words:', len(result[0]), ', failure words:', len(result[1]))
+    if result[1] : print ('failure_words: ', result[1])
+    print ('===> success_words below <===')
+    for record in result[0] :
         print ('---------------')
-        for item in record:
+        for item in record :
             print (item)   
 
 
-if __name__ == "__main__":
+if __name__ == "__main__" :
     main(sys.argv[1:])
