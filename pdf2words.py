@@ -163,7 +163,8 @@ def main(argv) :
     for record in result[0] :
         print ('---------------')
         for item in record :
-            print (item)   
+            for l_item in item
+                print (l_item)   
 
 
 if __name__ == "__main__" :
