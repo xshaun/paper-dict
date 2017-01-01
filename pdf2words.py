@@ -44,7 +44,7 @@ def pdf2text(pdf_file) :
 
 def text2words(text_string) :
     # rectify words having a break.
-    temp, number = re.compile(r'-\s{1}').subn('', text_string) 
+    temp, number = re.compile(r'-\s{1}').subn('', text_string.lower()) 
     
     # convert chinese characters into english characters.
     temp, number = re.compile(r'’').subn('\'', temp)
@@ -80,12 +80,12 @@ def text2words(text_string) :
 #   ], // <- success_words
 #   [ word1, word2, ...] // <- failure_words
 # ]
-def consult_bing(words_list) :
+def consult_bing(words_list , ignore_words = set()) :
     success_words_tag = set()
     success_words     = []
-    failure_words     = list(set(words_list))
+    failure_words     = list(set(words_list)-ignore_words)
     
-    for word in failure_words[1:5] :
+    for word in failure_words :
         # HTML response
         for i in range(5) :
             try : 
@@ -102,7 +102,7 @@ def consult_bing(words_list) :
 
         # DOM node of searching word
         keyword = cts.find('.hd_area>#headword>h1>strong').text()
-        if keyword in success_words_tag : continue
+        if keyword in (success_words_tag | ignore_words) : continue
 
         # DOM node of word's pronunciation
         pronunciation = cts.find('.hd_area>.hd_tf_lh>.hd_p1_1').text()
@@ -125,30 +125,54 @@ def consult_bing(words_list) :
 
 
 def main(argv) :
-    # argv
-    input_pdf_file = ''
+    # args
+    UARGS = {
+        'INPUT_PDF_PATH' : '' ,
+        'IGNORE_WORDS_FILE_PATH' : '' ,
+    }
+
     try :
-        opts, args = getopt.getopt(argv,"hi:",["ifile="])
-    except getopt.GetoptError :
-        print ('pdf2words.py -i <input_pdf_file>')
+        opts, args = getopt.getopt(argv, "hi:", ["help", "ifile=", "ignore="])
+    except getopt.GetoptError as err :
+        print (str(err))
+        usage()
         sys.exit(2)
     for opt, arg in opts :
-        if opt == '-h' :
-            print ('pdf2words.py -i <input_pdf_file>')
+        if opt in ('-h', '--help') :
+            usage()
             sys.exit()
         elif opt in ("-i", "--ifile") :
-            input_pdf_file = arg
+            UARGS['INPUT_PDF_PATH'] = arg
+        elif opt in ("--ignore") :
+            UARGS['IGNORE_WORDS_FILE_PATH'] = arg
+        else :
+            assert False, "unhandled option"
 
     # validity of input
+    pdf_file = ''
     try :
-        pdf_file = urlopen(input_pdf_file)
+        if re.compile(r'[a-zA-z]+://[^\s]*').match(UARGS['INPUT_PDF_PATH']) :
+            pdf_file = urlopen(UARGS['INPUT_PDF_PATH'])
+        else :
+            pdf_file = open(os.path.abspath(UARGS['INPUT_PDF_PATH']), 'r')
     except :
+        print ('Error: Invalid argv \'-i input_pdf_path\' ')
+        sys.exit()
+    
+    ignore_words = set()
+    if UARGS['IGNORE_WORDS_FILE_PATH'] :
         try :
-            location = os.path.abspath(input_pdf_file)
-            pdf_file = open(location, 'rb')
+            if re.compile(r'[a-zA-z]+://[^\s]*').match(UARGS['IGNORE_WORDS_FILE_PATH']) :
+                ignore_words_file = urlopen(UARGS['IGNORE_WORDS_FILE_PATH'])
+            else :
+                ignore_words_file = open(os.path.abspath(UARGS['IGNORE_WORDS_FILE_PATH']))
+
+            ignore_words = set(ignore_words_file.read().lower().split())
+
         except :
-            print (' invalid argv \'input_pdf_file\' ')
+            print ('Error: Invalid argv \'-i input_pdf_path\' ')
             sys.exit()
+
 
     # process
     print ('converting pdf to text')
@@ -156,7 +180,7 @@ def main(argv) :
     print ('spliting text to words_list')
     words_list = text2words(text_string)
     print ('consulting a dictionary')
-    result = consult_bing(words_list)
+    result = consult_bing(words_list, ignore_words)
   
     # show
     print ('=================================>>>')
@@ -171,6 +195,14 @@ def main(argv) :
             else :
                 print (item)
     print ('<<<=================================')
+
+
+def usage() :
+    print ('usage: pdf2words -i <input_pdf_path> [options]')
+    print ('Options and arguments: ')
+    print (' ' * 4, '-i : input_pdf_path; local relative path or url')
+    print (' ' * 4, '--ignore : file path of ignore words list')
+    pass
 
 if __name__ == "__main__" :
     main(sys.argv[1:])
