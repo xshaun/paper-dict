@@ -144,6 +144,7 @@ amount
 ampere
 amplify
 amuse
+an
 analyse
 analysis
 ancestor
@@ -201,6 +202,7 @@ april
 arabian
 arbitrary
 architecture
+are
 area
 argue
 argument

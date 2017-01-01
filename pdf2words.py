@@ -71,21 +71,24 @@ def text2words(text_string) :
 
 
 # structure of return value
-# [
-#   [ 
-#       [keyword1, pronunciation1, explanation1],
-#       [keyword2, explanation2],
-#       [keyword3, pronunciation3], 
-#       ...
-#   ], // <- success_words
-#   [ word1, word2, ...] // <- failure_words
-# ]
+# {
+#   'success_words' : [ word1, word2, ...],
+#   'failure_words' : [ word1, word2, ...],
+#   'success_words_info' :
+#       [ 
+#           [keyword1, pronunciation1, explanation1],
+#           [keyword2, explanation2],
+#           [keyword3, pronunciation3], 
+#           ...
+#       ]
+# }
 def consult_bing(words_list , ignore_words = set()) :
-    success_words_tag = set()
-    success_words     = []
-    failure_words     = list(set(words_list)-ignore_words)
-    
-    for word in failure_words :
+    success_words       = set()
+    success_words_info  = []
+    searching_words     = set(words_list) - ignore_words
+    failure_words       = list(searching_words)
+
+    for word in searching_words :
         # HTML response
         for i in range(5) :
             try : 
@@ -102,7 +105,7 @@ def consult_bing(words_list , ignore_words = set()) :
 
         # DOM node of searching word
         keyword = cts.find('.hd_area>#headword>h1>strong').text()
-        if keyword in (success_words_tag | ignore_words) : continue
+        if keyword in (success_words | ignore_words) : continue
 
         # DOM node of word's pronunciation
         pronunciation = cts.find('.hd_area>.hd_tf_lh>.hd_p1_1').text()
@@ -114,15 +117,19 @@ def consult_bing(words_list , ignore_words = set()) :
             e_def = pyq(e).children('span.def').text()
             explanation.append('[' + e_pos + ']' + e_def)
         
-        word_info = [ x for x in [keyword, pronunciation, explanation] if x ]
-        success_words.append(word_info)
-        success_words_tag.add(keyword)
+        success_words.add(keyword)
+        success_words_info.append( [ x for x in [keyword, pronunciation, explanation] if x ] )
+    
+    result = {
+        'success_words' : list(success_words),
+        'failure_words' : failure_words,
+        'success_words_info' : success_words_info,
+    }
+    result['success_words'].sort()
+    result['failure_words'].sort()
+    result['success_words_info'].sort()
 
-    success_words.sort()
-    failure_words.sort()
-    result = [success_words, failure_words]
     return (result)
-
 
 def main(argv) :
     # args
@@ -182,12 +189,16 @@ def main(argv) :
     print ('consulting a dictionary')
     result = consult_bing(words_list, ignore_words)
   
+  #   'success_words' : [ word1, word2, ...],
+#   'failure_words' : [ word1, word2, ...],
+#   'success_words_info' :
+#   
     # show
     print ('=================================>>>')
-    print ('success words:', len(result[0]), ', failure words:', len(result[1]))
-    if result[1] : print ('failure_words: ', result[1])
-    print ('success_words: ')
-    for record in result[0] :
+    print ('success_words:', len(result['success_words']), result['success_words'])
+    print ('failure_words:', len(result['failure_words']), result['failure_words'])
+    print ('success_words_info: ')
+    for record in result['success_words_info'] :
         print ('---------------')
         for item in record :
             if isinstance(item, list) : 

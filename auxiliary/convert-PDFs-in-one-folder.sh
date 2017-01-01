@@ -9,5 +9,5 @@
 dirpath=<directory path>
 for i in ${dirpath}/*.pdf; do
   filename="pdf2words-$(basename -s .pdf $(echo ${i} | tr -d " ")).txt"
-  ./pdf2words -i "${i}" > ${dirpath}/${filename}
-done 
+  pdf2words -i "${i}" > ${dirpath}/${filename}
+done
