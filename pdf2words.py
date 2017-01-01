@@ -85,7 +85,7 @@ def consult_bing(words_list) :
     success_words     = []
     failure_words     = list(set(words_list))
     
-    for word in failure_words :
+    for word in failure_words[1:5] :
         # HTML response
         for i in range(5) :
             try : 
@@ -151,21 +151,26 @@ def main(argv) :
             sys.exit()
 
     # process
+    print ('converting pdf to text')
     text_string = pdf2text(pdf_file)
+    print ('spliting text to words_list')
     words_list = text2words(text_string)
-    print (words_list)
+    print ('consulting a dictionary')
     result = consult_bing(words_list)
   
     # show
+    print ('=================================>>>')
     print ('success words:', len(result[0]), ', failure words:', len(result[1]))
     if result[1] : print ('failure_words: ', result[1])
-    print ('===> success_words below <===')
+    print ('success_words: ')
     for record in result[0] :
         print ('---------------')
         for item in record :
-            for l_item in item
-                print (l_item)   
-
+            if isinstance(item, list) : 
+                for l_item in item : print(l_item)
+            else :
+                print (item)
+    print ('<<<=================================')
 
 if __name__ == "__main__" :
     main(sys.argv[1:])
