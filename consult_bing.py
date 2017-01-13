@@ -10,6 +10,7 @@ success_words       = set()
 success_words_info  = list()
 failure_words       = list()
 ignore_words        = set()
+searching_words     = set()
 threadLock_sw       = threading.Lock()
 threadLock_swi      = threading.Lock()
 threadLock_fw       = threading.Lock()
@@ -22,15 +23,17 @@ class wordThread (threading.Thread):
         self.word = word
 
     def run(self):
-        print ("start thread:" + self.name)
+        #print ("start thread:" + self.name)
         search_bing(self.word)
-        print ("end thread: " + self.name)
+        #print ("end thread: " + self.name)
+        print ("\rPercent: %.2f %%"%(len(success_words)/len(searching_words)), end="")
 
 def search_bing(word) :
     global success_words
     global success_words_info
     global failure_words
     global ignore_words
+    global searching_words
 
     # HTML response
     for i in range(5) :
@@ -87,9 +90,10 @@ def search_bing(word) :
 def consult_bing(words_list, ignore_words_set = set()) :
     global failure_words
     global ignore_words
-    searching_words = set(words_list) - ignore_words_set
+    global searching_words
+    searching_words |= set(words_list) - ignore_words_set
     failure_words.extend(searching_words)
-    ignore_words = ignore_words | ignore_words_set
+    ignore_words |= ignore_words_set
 
     threads = []
     for index, item in enumerate(searching_words) :
@@ -112,7 +116,7 @@ def consult_bing(words_list, ignore_words_set = set()) :
     return (result)
 
 def show_bing (result) :
-    print ('=================================>>>')
+    print ('\n=================================>>>')
     print ('success_words:', len(result['success_words']), result['success_words'])
     print ('failure_words:', len(result['failure_words']), result['failure_words'])
     print ('success_words_info:', len(result['success_words_info']))
