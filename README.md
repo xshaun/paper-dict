@@ -96,7 +96,7 @@ root@019d28813cae:/# pdf2words -i <URL path>/target.pdf
 - [x] support to convert local pdf-file and remote pdf-file.
 - [x] support to consult online-bing dictionary.
 - [x] support to filter words through ignore.txt.
-- [ ] support to multiple threads to speed up queries.
+- [x] support to multiple threads to speed up queries.
 - [ ] support more spiders to consult more dictionaries.
 - [ ] support local or cache dictionary.
 - [ ] support progress-bar.

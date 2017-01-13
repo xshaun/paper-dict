@@ -37,7 +37,7 @@ def text2words(text_string) :
 if __name__ == "__main__" :
     try :
         # Local File
-        pdf_file = open(os.path.abspath('./test/test_python_overview.pdf'), 'rb')
+        pdf_file = open(os.path.abspath('./tests/test_python_overview.pdf'), 'rb')
         pdf_text = pt.pdf2text(pdf_file)
         words = text2words(pdf_text)
         print (words)

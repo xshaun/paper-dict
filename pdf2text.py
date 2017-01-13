@@ -47,7 +47,7 @@ if __name__ == "__main__" :
         pdf_file.close()
 
         # Local File
-        pdf_file = open(os.path.abspath('./test/test_python_overview.pdf'), 'rb')
+        pdf_file = open(os.path.abspath('./tests/test_python_overview.pdf'), 'rb')
         pdf_text = pdf2text(pdf_file)
         print (pdf_text)
         pdf_file.close()

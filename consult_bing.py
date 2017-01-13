@@ -2,7 +2,75 @@
 # -*- coding: utf-8 -*-
 
 from pyquery import PyQuery as pyq
+import threading
 import time
+
+# Global variables
+success_words       = set()
+success_words_info  = list()
+failure_words       = list()
+ignore_words        = set()
+threadLock_sw       = threading.Lock()
+threadLock_swi      = threading.Lock()
+threadLock_fw       = threading.Lock()
+
+class wordThread (threading.Thread):
+    def __init__(self, threadID, name, word):
+        threading.Thread.__init__(self)
+        self.threadID = threadID
+        self.name = name
+        self.word = word
+
+    def run(self):
+        print ("start thread:" + self.name)
+        search_bing(self.word)
+        print ("end thread: " + self.name)
+
+def search_bing(word) :
+    global success_words
+    global success_words_info
+    global failure_words
+    global ignore_words
+
+    # HTML response
+    for i in range(5) :
+        try : 
+            doc = pyq(url=r'http://cn.bing.com/dict/search?q=' + word)
+            break
+        except :    # capture all exceptions
+            time.sleep(3)
+            continue
+
+    # DOM node of effective content
+    cts = doc('.content>.rs_area>.lf_area>.qdef')
+    if not cts : return
+
+    if word in failure_words : 
+        threadLock_fw.acquire()
+        failure_words.remove(word)
+        threadLock_fw.release()
+
+    # DOM node of searching word
+    keyword = cts.find('.hd_area>#headword>h1>strong').text()
+    if keyword in (success_words | ignore_words) : return
+
+    # DOM node of word's pronunciation
+    pronunciation = cts.find('.hd_area>.hd_tf_lh>.hd_p1_1').text()
+
+    # DOM node of word's explanation
+    explanation = []
+    for e in cts.find('ul').children():
+        e_pos = pyq(e).children('span.pos').text()
+        e_def = pyq(e).children('span.def').text()
+        explanation.append('[' + e_pos + ']' + e_def)
+    
+    threadLock_sw.acquire()
+    success_words.add(keyword)
+    threadLock_sw.release()
+
+    threadLock_swi.acquire()
+    success_words_info.append( [ x for x in [keyword, pronunciation, explanation] if x ] )
+    threadLock_swi.release()
 
 # structure of return value
 # {
@@ -16,44 +84,22 @@ import time
 #           ...
 #       ]
 # }
-def consult_bing(words_list, ignore_words = set()) :
-    success_words       = set()
-    success_words_info  = []
-    searching_words     = set(words_list) - ignore_words
-    failure_words       = list(searching_words)
+def consult_bing(words_list, ignore_words_set = set()) :
+    global failure_words
+    global ignore_words
+    searching_words = set(words_list) - ignore_words_set
+    failure_words.extend(searching_words)
+    ignore_words = ignore_words | ignore_words_set
 
-    for word in searching_words :
-        # HTML response
-        for i in range(5) :
-            try : 
-                doc = pyq(url=r'http://cn.bing.com/dict/search?q=' + word)
-                failure_words.remove(word)
-                break
-            except :    # capture all exceptions
-                time.sleep(2)
-                continue
-   
-        # DOM node of effective content
-        cts = doc('.content>.rs_area>.lf_area>.qdef')
-        if not cts : continue
+    threads = []
+    for index, item in enumerate(searching_words) :
+        thread = wordThread(index, 'searching ' + item, item)
+        thread.start()
+        threads.append(thread)
 
-        # DOM node of searching word
-        keyword = cts.find('.hd_area>#headword>h1>strong').text()
-        if keyword in (success_words | ignore_words) : continue
+    for t in threads :
+        t.join()
 
-        # DOM node of word's pronunciation
-        pronunciation = cts.find('.hd_area>.hd_tf_lh>.hd_p1_1').text()
-
-        # DOM node of word's explanation
-        explanation = []
-        for e in cts.find('ul').children():
-            e_pos = pyq(e).children('span.pos').text()
-            e_def = pyq(e).children('span.def').text()
-            explanation.append('[' + e_pos + ']' + e_def)
-        
-        success_words.add(keyword)
-        success_words_info.append( [ x for x in [keyword, pronunciation, explanation] if x ] )
-    
     result = {
         'success_words' : list(success_words),
         'failure_words' : failure_words,
@@ -69,7 +115,7 @@ def show_bing (result) :
     print ('=================================>>>')
     print ('success_words:', len(result['success_words']), result['success_words'])
     print ('failure_words:', len(result['failure_words']), result['failure_words'])
-    print ('success_words_info: ')
+    print ('success_words_info:', len(result['success_words_info']))
     for record in result['success_words_info'] :
         print ('---------------')
         for item in record :
@@ -83,6 +129,5 @@ def show_bing (result) :
 # TEST
 if __name__ == "__main__" :
     words_list = ['abc', 'above-mentioned', 'activex', 'actua', 'add', 'an', 'and', 'apart', 'applications', 'are', 'as', 'at', 'automatic', 'ava', 'be', 'before', "beginner's", 'beginner-leve', 'better', 'big', 'broad', 'browsers', 'building', 'bulk', 'by', 'byte-code', 'ca', 'can', 'checking', 'with', 'within', 'write', 'www', 'you', 'your']
-
-    result = consult_bing( words_list)
+    result = consult_bing(words_list)
     show_bing(result)
