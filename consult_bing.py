@@ -8,7 +8,7 @@ import time
 # Global variables
 success_words       = set()
 success_words_info  = list()
-failure_words       = list()
+failure_words       = set()
 ignore_words        = set()
 searching_words     = set()
 threadLock_sw       = threading.Lock()
@@ -26,7 +26,7 @@ class wordThread (threading.Thread):
         #print ("start thread:" + self.name)
         search_bing(self.word)
         #print ("end thread: " + self.name)
-        print ("\rPercent: %.2f %%"%(len(success_words)/len(searching_words)), end="")
+        print ("\rPercent: %.2f %% [not 100%% is ok, ignoring transformation ]"%(len(success_words|failure_words)/len(searching_words)*100), end="")
 
 def search_bing(word) :
     global success_words
@@ -34,6 +34,9 @@ def search_bing(word) :
     global failure_words
     global ignore_words
     global searching_words
+    global threadLock_sw
+    global threadLock_swi
+    global threadLock_fw
 
     # HTML response
     for i in range(5) :
@@ -46,12 +49,11 @@ def search_bing(word) :
 
     # DOM node of effective content
     cts = doc('.content>.rs_area>.lf_area>.qdef')
-    if not cts : return
-
-    if word in failure_words : 
+    if not cts : 
         threadLock_fw.acquire()
-        failure_words.remove(word)
+        failure_words.add(word)
         threadLock_fw.release()
+        return
 
     # DOM node of searching word
     keyword = cts.find('.hd_area>#headword>h1>strong').text()
@@ -88,11 +90,13 @@ def search_bing(word) :
 #       ]
 # }
 def consult_bing(words_list, ignore_words_set = set()) :
+    global success_words
+    global success_words_info
     global failure_words
     global ignore_words
     global searching_words
+
     searching_words |= set(words_list) - ignore_words_set
-    failure_words.extend(searching_words)
     ignore_words |= ignore_words_set
 
     threads = []
@@ -106,7 +110,7 @@ def consult_bing(words_list, ignore_words_set = set()) :
 
     result = {
         'success_words' : list(success_words),
-        'failure_words' : failure_words,
+        'failure_words' : list(failure_words),
         'success_words_info' : success_words_info,
     }
     result['success_words'].sort()

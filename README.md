@@ -50,11 +50,11 @@ $ sudo chmod +x pdf2words.py
 
 local file:
 ```Shell
-$ pdf2words.py -i ./<relative path>/target.pdf
+$ pdf2words.py -i ./<relative path>/target.pdf [-n ingore_words.txt]
 ```
 remote file:
 ```Shell
-$ pdf2words.py -i <URL path>/target.pdf
+$ pdf2words.py -i <URL path>/target.pdf [-n ingore_words.txt]
 ```
 
 ### Docker
@@ -85,11 +85,11 @@ $ docker run -it -v /<host path>/PDF:/<container path>/pdf --name pdf2words-con 
 
 local file:
 ```Shell
-root@019d28813cae:/# pdf2words -i ./<relative path>/target.pdf
+root@019d28813cae:/# pdf2words -i ./<relative path>/target.pdf [-n ingore_words.txt]
 ```
 remote file:
 ```Shell
-root@019d28813cae:/# pdf2words -i <URL path>/target.pdf
+root@019d28813cae:/# pdf2words -i <URL path>/target.pdf [-n ingore_words.txt]
 ```
 
 ## Features
