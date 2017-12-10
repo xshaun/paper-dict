@@ -24,7 +24,7 @@ RUN apt-get update && apt-get install -y \
         libxslt-dev \
         libzip-dev
 
-# Download and Configure pdf2words.py
+# Download and Configure paper-dict.py
 #
 # pip mirror list: 
 #   - pypi.python.org   (San Francisco, California US) default
@@ -33,11 +33,11 @@ RUN apt-get update && apt-get install -y \
 #   - pypi.fcio.net (Oberhausen, Nordrhein-Westfalen DE)
 #   
 ARG PIP_MIRROR=pypi.fcio.net
-RUN curl -sSL https://github.com/xshaun/pdf2words/archive/master.tar.gz | tar -xzv \
-    && cd pdf2words-master \
+RUN curl -sSL https://github.com/xshaun/paper-dict/archive/master.tar.gz | tar -xzv \
+    && cd paper-dict-master \
     && pip3 install --timeout=100 -i "https://$PIP_MIRROR/simple" -r requirements.txt \
-    && chmod +x pdf2words.py \
-    && ln -s pdf2words.py /bin/pdf2words
+    && chmod +x paper-dict.py \
+    && ln -s paper-dict.py /bin/paper-dict
 
 # Clean up APT when done.
 RUN apt-get autoremove \
