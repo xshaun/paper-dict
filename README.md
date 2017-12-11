@@ -36,7 +36,7 @@ $ curl -sSL https://github.com/xshaun/paper-dict/archive/master.tar.gz | tar -xz
 
 on ubuntu(debian):
 ```Shell
-$ sudo apt-get install python3 python3-pip libxml2-dev libxslt-dev libzip-dev
+$ sudo apt-get install python3 python3-pip python3-reportlab libxml2-dev libxslt-dev libzip-dev
 $ pip3 install --timeout=100 -r requirements.txt
 ```
 
