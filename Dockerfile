@@ -19,6 +19,7 @@ RUN sed -ri "s/(httpredir|deb).debian.org/$APT_MIRROR/g" /etc/apt/sources.list
 RUN apt-get update && apt-get install -y \
         python3 \
         python3-pip \
+        python3-reportlab \
         curl \
         libxml2-dev \
         libxslt-dev \
@@ -35,7 +36,7 @@ RUN apt-get update && apt-get install -y \
 ARG PIP_MIRROR=pypi.python.org
 RUN curl -sSL https://github.com/xshaun/paper-dict/archive/master.tar.gz | tar -xzv \
     && cd paper-dict-master \
-    && pip3 install --timeout=100 -i "https://$PIP_MIRROR/simple" -r requirements.txt \
+    && pip3 install --timeout=1000 -i "https://$PIP_MIRROR/simple" -r requirements.txt \
     && chmod +x paper-dict.py \
     && chmod +x paper-dict-folder.sh \
     && ln -s paper-dict.py /bin/paper-dict \
