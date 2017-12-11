@@ -53,7 +53,9 @@ $ sudo chmod +x paper-dict-folder.sh
 local or remote pdf-file:
 ```Shell
 $ paper-dict.py -i ./<relative path>/target.pdf -o <output.pdf> [-n ingore_words.txt]
+# or
 $ paper-dict.py -i <URL path>/target.pdf -o <output.pdf> [-n ingore_words.txt]
+# or
 $ paper-dict-folder <relative path>
 ```
 
@@ -79,6 +81,7 @@ $ docker build -t paper-dict-img -f <PATH/Dockerfile>
 $ docker run -it --name paper-dict-con paper-dict-img /bin/bash
 # or
 $ docker run -it -v <host path>:/<container path>/pdf --name paper-dict-con paper-dict-img /bin/bash
+# or
 $ docker run -it -v ~/:/pdf --name paper-dict-con paper-dict-img /bin/bash
 ```
 
@@ -87,7 +90,9 @@ $ docker run -it -v ~/:/pdf --name paper-dict-con paper-dict-img /bin/bash
 local or remote pdf-file:
 ```Shell
 root@019d28813cae:/# paper-dict -i ./<relative path>/target.pdf -o <output.pdf> [-n ingore_words.txt]
+# or
 root@019d28813cae:/# paper-dict -i <URL path>/target.pdf -o <output.pdf> [-n ingore_words.txt]
+# or
 root@019d28813cae:/# paper-dict-folder <relative path>
 ```
 
