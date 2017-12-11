@@ -32,12 +32,14 @@ RUN apt-get update && apt-get install -y \
 #   - pypi.pubyun.com   (Changzhou, Jiangsu CN)
 #   - pypi.fcio.net (Oberhausen, Nordrhein-Westfalen DE)
 #   
-ARG PIP_MIRROR=pypi.fcio.net
+ARG PIP_MIRROR=pypi.python.org
 RUN curl -sSL https://github.com/xshaun/paper-dict/archive/master.tar.gz | tar -xzv \
     && cd paper-dict-master \
     && pip3 install --timeout=100 -i "https://$PIP_MIRROR/simple" -r requirements.txt \
     && chmod +x paper-dict.py \
-    && ln -s paper-dict.py /bin/paper-dict
+    && chmod +x paper-dict-folder.sh \
+    && ln -s paper-dict.py /bin/paper-dict \
+    && ln -s paper-dict-folder.sh /bin/paper-dict-folder
 
 # Clean up APT when done.
 RUN apt-get autoremove \
