@@ -20,8 +20,6 @@
 
 ## HOW TO USE
 
-<div style="float: left; width: 50%">
-
 ### Debian
 
 #### STEP1. Download paper-dict.py
@@ -61,10 +59,8 @@ $ paper-dict.py -i <URL path>/target.pdf -o <output.pdf> [-n ingore_words.txt]
 # or
 $ paper-dict-folder <relative path>
 ```
-</div>
 
-<div style="float: right; width: 50%">
-    
+
 ### Docker
 
 #### STEP1. Download paper-dict.py
@@ -95,13 +91,12 @@ $ docker run -it -v ~/:/hosthome --name paper-dict-con paper-dict-img /bin/bash
 
 local or remote pdf-file:
 ```Shell
-root@019d28813cae:/# paper-dict -i ./<relative path>/target.pdf -o <output.pdf> [-n ingore_words.txt]
+root@019d28813cae:/# paper-dict.py -i ./<relative path>/target.pdf -o <output.pdf> [-n ingore_words.txt]
 # or
-root@019d28813cae:/# paper-dict -i <URL path>/target.pdf -o <output.pdf> [-n ingore_words.txt]
+root@019d28813cae:/# paper-dict.py -i <URL path>/target.pdf -o <output.pdf> [-n ingore_words.txt]
 # or
-root@019d28813cae:/# paper-dict-folder <relative path>
+root@019d28813cae:/# paper-dict-folder.sh <relative path>
 ```
-</div>
 
 ## FEATURES
 - [x] support to convert local pdf-file and remote pdf-file.
