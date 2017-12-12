@@ -1,25 +1,27 @@
 # paper-dict
-> This subject is to help students who are freshers of reading academic papers to consult unknown words and improve their English skills and reading paper skills.
-> convert PDF to text, then split them into words, and consult online-directory through spiders(python script), finally build a vocabulary list and generate a pdf file.
+> This subject is to help students who are freshers of reading academic papers to consult unknown words, remember these words ahead and reduce reading time. This way can improve their English skills and reading paper skills.
+>
+> The process consists of to convert PDF to text, to split them into words, and to consult online-directory through spiders(python script), finally to build a vocabulary list and generate a pdf file.
 
 ---
 
-1. How to use
-  * [Traditional](#traditional)
-    1. [Download paper-dict.py](#step1-download-paper-dictpy)
-    2. [Install dependency packages](#step2-install-dependency-packages)
-    3. [Make it executable](#step3-make-it-executable)
-    4. [Enjoy](#step4-enjoy)
-  * [Docker](#docker)
-    1. [Download paper-dict.py](#step1-download-paper-dictpy-1)
-    2. [Build Docker Image](#step2-build-docker-image)
-    3. [Create a container](#step3-create-a-container)
-    4. [Enjoy](#step4-enjoy-1)
-2. [Features](#features)
+1. HOW TO USE
+    * [Debian/Ubuntu](#Debian)
+        1. [Download paper-dict.py](#step1-download-paper-dictpy)
+        2. [Install dependency packages](#step2-install-dependency-packages)
+        3. [Make it executable](#step3-make-it-executable)
+        4. [Enjoy](#step4-enjoy)
+    * [Docker](#docker)
+        1. [Download paper-dict.py](#step1-download-paper-dictpy-1)
+        2. [Build Docker Image](#step2-build-docker-image)
+        3. [Create a container](#step3-create-a-container)
+        4. [Enjoy](#step4-enjoy-1)
+2. [FEATURES](#features)
 
-## How to use
+## HOW TO USE
 
-### Traditional
+<div style="float: left; width: 50%">
+### Debian
 
 #### STEP1. Download paper-dict.py
 
@@ -58,7 +60,9 @@ $ paper-dict.py -i <URL path>/target.pdf -o <output.pdf> [-n ingore_words.txt]
 # or
 $ paper-dict-folder <relative path>
 ```
+</div>
 
+<div style="float: right; width: 50%">
 ### Docker
 
 #### STEP1. Download paper-dict.py
@@ -82,7 +86,7 @@ $ docker run -it --name paper-dict-con paper-dict-img /bin/bash
 # or
 $ docker run -it -v <host path>:/<container path>/pdf --name paper-dict-con paper-dict-img /bin/bash
 # or
-$ docker run -it -v ~/:/pdf --name paper-dict-con paper-dict-img /bin/bash
+$ docker run -it -v ~/:/hosthome --name paper-dict-con paper-dict-img /bin/bash
 ```
 
 #### STEP4. Enjoy
@@ -95,8 +99,9 @@ root@019d28813cae:/# paper-dict -i <URL path>/target.pdf -o <output.pdf> [-n ing
 # or
 root@019d28813cae:/# paper-dict-folder <relative path>
 ```
+</div>
 
-## Features
+## FEATURES
 - [x] support to convert local pdf-file and remote pdf-file.
 - [x] support to consult online-bing dictionary.
 - [x] support to filter words through ignore.txt.

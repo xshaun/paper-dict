@@ -19,13 +19,8 @@ RUN sed -ri "s/(httpredir|deb).debian.org/$APT_MIRROR/g" /etc/apt/sources.list
 
 # Packaged dependencies
 RUN apt-get update && apt-get install -y \
-        python3 \
-        python3-pip \
-#        python3-reportlab \
-        curl \
-        libxml2-dev \
-        libxslt-dev \
-        libzip-dev
+        python3 python3-pip python3-reportlab \
+        curl libxml2-dev libxslt-dev libzip-dev
 
 # Download and Configure paper-dict.py
 #
