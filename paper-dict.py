@@ -90,8 +90,8 @@ def usage(exitcode=0):
     print('Detail options and arguments: ')
     print(' ' * 4, '-i / --ifile: input_pdf_path; local relative path or url')
     print(' ' * 4, '-o / --ofile: output_pdf_path; local relative path')
-    print(' ' * 4, '-n / --ignore : file path of ignore words list')
-    print(' ' * 4, '-h / --help : print help info')
+    print(' ' * 4, '-n / --ignore: file path of ignore words list')
+    print(' ' * 4, '-h / --help: print help info')
     sys.exit(exitcode)
 
 if __name__ == "__main__":
