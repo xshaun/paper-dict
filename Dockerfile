@@ -1,6 +1,8 @@
 # Use debian:jessie as base image.
 FROM debian:jessie
 
+MAINTAINER XiaoyangSun "xshaun@outlook.com"
+
 # allow replacing httpredir or deb mirror
 #
 # debian mirror list: 
@@ -19,7 +21,7 @@ RUN sed -ri "s/(httpredir|deb).debian.org/$APT_MIRROR/g" /etc/apt/sources.list
 RUN apt-get update && apt-get install -y \
         python3 \
         python3-pip \
-        python3-reportlab \
+#        python3-reportlab \
         curl \
         libxml2-dev \
         libxslt-dev \
@@ -38,12 +40,12 @@ RUN curl -sSL https://github.com/xshaun/paper-dict/archive/master.tar.gz | tar -
     && cd paper-dict-master \
     && pip3 install --timeout=1000 -i "https://$PIP_MIRROR/simple" -r requirements.txt \
     && chmod +x paper-dict.py \
-    && chmod +x paper-dict-folder.sh \
-    && ln -s paper-dict.py /bin/paper-dict \
-    && ln -s paper-dict-folder.sh /bin/paper-dict-folder
+    && chmod +x paper-dict-folder.sh
 
 # Clean up APT when done.
 RUN apt-get autoremove \
     && apt-get autoclean \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+WORKDIR ./paper-dict-master
