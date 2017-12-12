@@ -1,3 +1,20 @@
+10-sec
+10s
+10sec
+1x
+2-sec
+2x
+4k
+4x
+5-sec
+5-second
+500-sec
+6x
+7x
+80-node
+8x
+95th
+9x
 a
 abandon
 ability
@@ -45,6 +62,7 @@ ache
 achieve
 achievement
 acid
+ACM
 acquaintance
 acquire
 acre
@@ -83,6 +101,7 @@ advice
 advisable
 advise
 aeroplane
+AF
 affair
 affect
 affection
@@ -174,8 +193,10 @@ anyone
 anything
 anyway
 anywhere
+Apache
 apart
 apartment
+Apollo
 apologize
 apology
 apparatus
@@ -246,6 +267,7 @@ assure
 astonish
 astronaut
 at
+ATC
 athlete
 atlantic
 atmosphere
@@ -522,6 +544,8 @@ cabbage
 cabin
 cabinet
 cable
+CACM
+Caesar
 cafe
 cafeteria
 cage
@@ -651,9 +675,11 @@ choice
 choke
 choose
 chop
+Chris
 christian
 christmas
 church
+CID
 cigarette
 cinema
 circle
@@ -700,6 +726,7 @@ cloudy
 club
 clue
 clumsy
+CMP
 coach
 coal
 coarse
@@ -723,6 +750,7 @@ colonel
 colony
 color
 column
+COM
 comb
 combination
 combine
@@ -893,6 +921,7 @@ cousin
 cover
 cow
 coward
+CPU
 crack
 craft
 crane
@@ -926,6 +955,7 @@ crush
 crust
 cry
 crystal
+CS
 cube
 cubic
 cucumber
@@ -967,10 +997,12 @@ daughter
 dawn
 day
 daylight
+DE
 dead
 deadly
 deaf
 deal
+Dean
 dear
 death
 debate
@@ -1004,6 +1036,7 @@ degree
 delay
 delegation
 delete
+Delgado
 delicate
 delicious
 delight
@@ -1135,6 +1168,7 @@ dock
 doctor
 document
 dog
+DOI
 dollar
 domestic
 donkey
@@ -1147,6 +1181,7 @@ double
 doubt
 doubtful
 doubtless
+Douglas
 down
 downstairs
 downward
@@ -1163,6 +1198,7 @@ drawing
 dread
 dream
 dress
+DRF
 drift
 drill
 drink
@@ -1176,6 +1212,7 @@ drug
 drum
 drunk
 dry
+DT
 duck
 due
 dull
@@ -1211,11 +1248,13 @@ echo
 economic
 economical
 economy
+ED
 edge
 edition
 editor
 educate
 education
+EF
 effect
 effective
 efficiency
@@ -1307,6 +1346,7 @@ equipment
 equivalent
 era
 erect
+Erlang
 error
 escape
 especially
@@ -1318,6 +1358,7 @@ estimate
 europe
 european
 evaluate
+Evans
 evaporate
 eve
 even
@@ -1527,6 +1568,7 @@ fluent
 fluid
 flush
 fly
+FN
 focus
 fog
 fold
@@ -1578,6 +1620,7 @@ frame
 framework
 france
 frank
+Franklin
 free
 freedom
 freely
@@ -1641,6 +1684,7 @@ gather
 gauge
 gay
 gaze
+GB
 general
 generally
 generate
@@ -1680,6 +1724,7 @@ glow
 glue
 go
 goal
+Goal
 goat
 god
 gold
@@ -1689,6 +1734,7 @@ good
 goodbye
 goodness
 goods
+Google
 goose
 govern
 government
@@ -1736,6 +1782,7 @@ groan
 grocer
 grocery
 gross
+Grosvenor
 ground
 group
 grow
@@ -1784,6 +1831,7 @@ harm
 harmful
 harmony
 harness
+Harris
 harsh
 harvest
 haste
@@ -1864,6 +1912,7 @@ honest
 honesty
 honey
 honeymoon
+Hong
 honour
 honourable
 hook
@@ -1888,6 +1937,8 @@ household
 housewife
 how
 however
+HTML
+HTTP
 huge
 human
 humble
@@ -1912,6 +1963,8 @@ identical
 identify
 idiom
 idle
+IE
+IEEE
 if
 ignorant
 ignore
@@ -1945,6 +1998,7 @@ imprison
 improve
 improvement
 in
+INC
 inch
 incident
 incline
@@ -2076,6 +2130,7 @@ itself
 j
 jacket
 jail
+Jain
 jam
 january
 japan
@@ -2088,6 +2143,7 @@ jet
 jewel
 jewish
 job
+JOBS
 join
 joint
 joke
@@ -2242,6 +2298,7 @@ lime
 limit
 limitation
 limited
+Lin
 line
 linen
 liner
@@ -2257,6 +2314,7 @@ liter
 literary
 literature
 little
+Liu
 live
 lively
 liver
@@ -2273,6 +2331,7 @@ lodge
 log
 logic
 logical
+London
 lonely
 long
 look
@@ -2293,6 +2352,7 @@ low
 lower
 loyal
 loyalty
+Lu
 luck
 lucky
 luggage
@@ -2302,6 +2362,7 @@ lunch
 lung
 luxury
 m
+M1
 machine
 mad
 madam
@@ -2416,11 +2477,13 @@ metric
 microcomputer
 microphone
 microscope
+Microsoft
 midday
 middle
 midnight
 midst
 might
+Milan
 mild
 mile
 military
@@ -2467,6 +2530,7 @@ moist
 moisture
 molecule
 moment
+MON
 monday
 money
 monitor
@@ -2476,6 +2540,7 @@ monthly
 monument
 mood
 moon
+Moore
 moral
 more
 moreover
@@ -2541,6 +2606,8 @@ naughty
 naval
 navigation
 navy
+ND
+NE
 near
 nearby
 nearly
@@ -2550,6 +2617,7 @@ necessary
 necessity
 neck
 necklace
+NED
 need
 needle
 needless
@@ -2581,6 +2649,7 @@ nineteen
 ninety
 ninth
 nitrogen
+NM
 no
 noble
 nobody
@@ -2610,10 +2679,12 @@ november
 now
 nowadays
 nowhere
+NSF
 nuclear
 nucleus
 nuisance
 number
+Numbers
 numerous
 nurse
 nursery
@@ -2675,6 +2746,7 @@ operation
 operational
 operator
 opinion
+Oppenheimer
 opponent
 opportunity
 oppose
@@ -2703,6 +2775,7 @@ origin
 original
 ornament
 orphan
+OS
 other
 otherwise
 ought
@@ -2736,11 +2809,13 @@ overnight
 overseas
 overtake
 overtime
+OW
 owe
 owl
 own
 owner
 ownership
+OWS
 ox
 p
 pace
@@ -3023,6 +3098,7 @@ prisoner
 private
 privilege
 prize
+PRO
 probability
 probable
 probably
@@ -3104,6 +3180,8 @@ push
 put
 puzzle
 q
+Qi
+Qian
 qualify
 quality
 quantity
@@ -3153,6 +3231,7 @@ raise
 rake
 range
 rank
+Rao
 rapid
 rapidly
 rare
@@ -3336,6 +3415,7 @@ revolt
 revolution
 revolutionary
 reward
+RF
 rhythm
 rib
 ribbon
@@ -3392,6 +3472,7 @@ routine
 row
 rowvt
 royal
+RT
 rub
 rubber
 rubbish
@@ -3526,6 +3607,7 @@ serve
 service
 session
 set
+Seth
 setting
 settle
 settlement
@@ -3976,6 +4058,7 @@ synthetic
 system
 systematic
 t
+T1
 table
 tablet
 tag
@@ -3996,6 +4079,8 @@ task
 taste
 tax
 taxi
+TB
+TCP
 tea
 teach
 teacher
@@ -4209,6 +4294,7 @@ trunk
 trust
 truth
 try
+TS
 tub
 tube
 tuck
@@ -4313,6 +4399,7 @@ used
 useful
 useless
 user
+USES
 usual
 usually
 utility
@@ -4340,6 +4427,7 @@ various
 vary
 vase
 vast
+VE
 vegetable
 vehicle
 veil
@@ -4410,12 +4498,14 @@ war
 warm
 warmth
 warn
+was
 wash
 waste
 watch
 water
 waterfall
 waterproof
+Watson
 wave
 wavelength
 wax
@@ -4445,6 +4535,8 @@ welcome
 weld
 welfare
 well
+Wendell
+were
 west
 western
 westward
@@ -4485,6 +4577,7 @@ widow
 width
 wife
 wild
+Wilkes
 will
 willing
 win
@@ -4539,7 +4632,9 @@ write
 writer
 writing
 wrong
+WT
 x
+Xin
 y
 yard
 yard
@@ -4564,5 +4659,6 @@ zeal
 zealous
 zebra
 zero
+Zhou
 zone
 zoo

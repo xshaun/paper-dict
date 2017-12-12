@@ -53,11 +53,11 @@ $ sudo chmod +x paper-dict-folder.sh
 
 local or remote pdf-file:
 ```Shell
-$ paper-dict.py -i ./<relative path>/target.pdf -o <output.pdf> [-n ingore_words.txt]
+$ ./paper-dict.py -i ./<relative path>/target.pdf -o <output.pdf> [-n ingore_words.txt]
 # or
-$ paper-dict.py -i <URL path>/target.pdf -o <output.pdf> [-n ingore_words.txt]
+$ ./paper-dict.py -i <URL path>/target.pdf -o <output.pdf> [-n ingore_words.txt]
 # or
-$ paper-dict-folder <relative path>
+$ ./paper-dict-folder.sh <relative path>
 ```
 
 
@@ -91,11 +91,11 @@ $ docker run -it -v ~/:/hosthome --name paper-dict-con paper-dict-img /bin/bash
 
 local or remote pdf-file:
 ```Shell
-root@019d28813cae:/# paper-dict.py -i ./<relative path>/target.pdf -o <output.pdf> [-n ingore_words.txt]
+root@019d28813cae:/# ./paper-dict.py -i ./<relative path>/target.pdf -o <output.pdf> [-n ingore_words.txt]
 # or
-root@019d28813cae:/# paper-dict.py -i <URL path>/target.pdf -o <output.pdf> [-n ingore_words.txt]
+root@019d28813cae:/# ./paper-dict.py -i <URL path>/target.pdf -o <output.pdf> [-n ingore_words.txt]
 # or
-root@019d28813cae:/# paper-dict-folder.sh <relative path>
+root@019d28813cae:/# ./paper-dict-folder.sh <relative path>
 ```
 
 ## FEATURES
@@ -104,3 +104,6 @@ root@019d28813cae:/# paper-dict-folder.sh <relative path>
 - [x] support to filter words through ignore.txt.
 - [x] support to multiple threads to speed up queries.
 - [x] support progress-bar.
+
+## SCREENSHOT
+![](./screenshot.png)
