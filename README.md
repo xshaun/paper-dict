@@ -21,6 +21,7 @@
 ## HOW TO USE
 
 <div style="float: left; width: 50%">
+
 ### Debian
 
 #### STEP1. Download paper-dict.py
@@ -63,6 +64,7 @@ $ paper-dict-folder <relative path>
 </div>
 
 <div style="float: right; width: 50%">
+    
 ### Docker
 
 #### STEP1. Download paper-dict.py
